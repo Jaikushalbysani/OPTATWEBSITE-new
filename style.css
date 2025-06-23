@@ -425,7 +425,7 @@ body {
     pointer-events: none;
 }
 .preloader-percentage {
-    font-size: 7vw;
+    font-size: 30vw;
     font-weight: 900;
     color: #fff;
     letter-spacing: -6px;
