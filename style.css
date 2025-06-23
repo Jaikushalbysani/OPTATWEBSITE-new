@@ -310,14 +310,14 @@ body {
     align-items: flex-end;
     gap: 10px;
     margin: 60px auto 0 auto;
-    max-width: 1450px;
     margin-top: 250px;
+    width: 95%;
 }
 .work-item {
     display: flex;
     flex-direction: column;
     align-items: left;
-    width: 1200px;
+    width: 95%;
     max-width: 55vw;
 }
 .work-item img,
