@@ -449,3 +449,76 @@ body.loading main, body.loading .logo, body.loading .lets-talk-btn, body.loading
     opacity: 0 !important;
     pointer-events: none !important;
 }
+
+@media (max-width: 500px) {
+    .view-more-section {
+        padding: 18px 4px;
+        margin-top: 60px;
+        border-radius: 18px;
+    }
+    .view-more-heading {
+        font-size: 28px;
+        letter-spacing: -2px;
+        margin-bottom: -18px;
+    }
+    .view-more-btn {
+        font-size: 18px;
+        letter-spacing: -2px;
+        padding: 12px 20px;
+        margin-bottom: 20px;
+    }
+    .schedule-contact {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 38px 19px;
+        margin: 30px 2px;
+        border-radius: 18px;
+        gap: 18px;
+    }
+    .schedule-contact__heading {
+        font-size: 22px;
+        margin-bottom: 18px;
+    }
+    .schedule-contact__email {
+        font-size: 22px;
+        margin-bottom: 12px;
+    }
+    .schedule-contact__label,
+    .schedule-contact__brand {
+        font-size: 14px;
+    }
+    .schedule-contact__links {
+        gap: 12px;
+        flex-direction: column;
+    }
+    .schedule-contact__link {
+        font-size: 14px;
+        border-width: 1px;
+    }
+    .schedule-contact__image {
+        min-width: 0;
+        flex: 0 0 120px;
+        margin-top: 10px;
+    }
+    .schedule-contact__image img {
+        width: 100px;
+        border-radius: 12px;
+    }
+    .heading h1{
+        line-height: 40px;
+    }
+    .txt1 img{
+        width: 400px;
+        margin-top: -100px;
+    }
+    .txt2 img{
+        width: 400px;
+        margin-top: -100px;
+        margin-bottom: -100px;
+    }
+    .work{
+        margin-left: 10px;
+        width:90%;
+    }
+}
+

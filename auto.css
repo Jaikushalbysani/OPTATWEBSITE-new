@@ -8,3 +8,23 @@
 .main img{
     width: 1200px
 }
+.mainp{
+    display: none;
+}
+
+@media (max-width: 500px) {
+    .main {
+        display: none;
+    }
+    .mainp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .mainp img{
+        width:340px;
+        margin-top: 60px;
+    }
+ 
+}
+
