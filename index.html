@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROJECT OPTAT - OPTIMIZE</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <div class="preloader" id="preloader">
+        <div class="preloader-percentage" id="preloaderPercentage">
+            <span id="preloaderPercentNum">0</span>%
+        </div>
+    </div>
+    <a href="#" class="lets-talk-btn">Let's Talk</a>
+    <div class="logo">
+        <img src="ASS/VWWEE.png" alt="">
+    </div>
+    <div class="heading">
+        <h1>THE ENGINE BEHIND <span>NEWGEN </span>BRANDS.</h1>  
+    </div>
+
+    <div class="hero">
+        <video id="heroVideo" src="ASS/hero.mp4" autoplay loop muted></video>
+    </div>
+
+    <div class="txt1">
+        <img src="ASS/txt1.png" alt="">
+    </div>
+
+    <div class="txt2">
+        <img src="ASS/txt2.png" alt="">
+    </div>
+
+    <div class="works">
+        <div class="work-item">
+            <img src="ASS/Screenshot 2025-06-23 210029.png" alt="Work 1">
+            <div class="work-caption">LUZER</div>
+        </div>
+        <div class="work-item">
+            <video src="ASS/PB3.mov" autoplay loop muted></video>
+            <div class="work-caption">OLDGODS</div>
+        </div>
+    </div>
+
+    <!-- New Section: Heading and View More Button -->
+    <div class="view-more-section">
+        <h2 class="view-more-heading">KNOW MORE ABOUT US.</h2>
+        <button class="view-more-btn">view possibilities</button>
+    </div>
+
+    <!-- Schedule & Contact Component -->
+    <section class="schedule-contact">
+        <div class="schedule-contact__content">
+            <p class="schedule-contact__label">Reach out:</p>
+            <a href="mailto:hello@projectoptat.com" class="schedule-contact__email">
+                optat.work@gmail.com<span class="arrow">&rarr;</span>
+            </a>
+            <p class="schedule-contact__brand">Project Optat</p>
+            <h2 class="schedule-contact__heading">A creative studio serving up an outsider view with an in-house feel.</h2>
+            <div class="schedule-contact__links">
+                <a href="#" class="schedule-contact__link">Instagram <span class="arrow">&rarr;</span></a>
+                <a href="#" class="schedule-contact__link">LinkedIn <span class="arrow">&rarr;</span></a>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="footer">
+        <img src="ASS/FOOTER.png" alt="">
+    </div>
+
+    <div class="transition-overlay" id="transitionOverlay"></div>
+    <div class="center-toggle-btn">
+        <div class="toggle-btn" id="toggleBtn">
+            <span class="toggle-btn__option toggle-btn__option--active" id="optimizeOption">OPTIMIZE</span>
+            <span class="toggle-btn__option" id="automateOption">AUTOMATE</span>
+            <span class="toggle-btn__slider" id="toggleSlider"></span>
+        </div>
+    </div>
+
+    <script>
+        function runMainScripts() {
+            // GSAP/Lenis/other scripts here
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.to("#heroVideo", {
+                scrollTrigger: {
+                    trigger: ".hero",
+                    start: "top center",
+                    end: "bottom top",
+                    scrub: true
+                },
+                y: -250,
+                scale: 1.3,
+                ease: "power1.out"
+            });
+
+            gsap.utils.toArray([
+                ".logo",
+                ".heading",
+                ".hero",
+                ".txt1",
+                ".txt2",
+                ".works",
+            ]).forEach((section, i) => {
+                gsap.from(section, {
+                    opacity: 0,
+                    y: 80,
+                    duration: 1.1,
+                    ease: "power3.out",
+                    delay: i * 0.08,
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 85%",
+                        toggleActions: "play reverse play reverse",
+                        once: false
+                    }
+                });
+            });
+
+            // Toggle animation and navigation for OPTIMIZE/AUTOMATE
+            const optimizeOption = document.getElementById('optimizeOption');
+            const automateOption = document.getElementById('automateOption');
+            const toggleBtn = document.getElementById('toggleBtn');
+            let sliderEl = document.getElementById('toggleSlider');
+            let active = 'optimize';
+            function setSlider(pos) {
+                sliderEl.style.transform = pos === 'optimize' ? 'translateX(0)' : 'translateX(100%)';
+            }
+            setSlider('optimize');
+
+            // Overlay transition
+            const overlay = document.getElementById('transitionOverlay');
+            function playTransitionAndNavigate(target) {
+                overlay.classList.add('active');
+                setTimeout(() => {
+                    window.location.href = target;
+                }, 700);
+            }
+
+            automateOption.addEventListener('click', function() {
+                if (active !== 'automate') {
+                    optimizeOption.classList.remove('toggle-btn__option--active');
+                    automateOption.classList.add('toggle-btn__option--active');
+                    setSlider('automate');
+                    active = 'automate';
+                    playTransitionAndNavigate('auto.html');
+                }
+            });
+            optimizeOption.addEventListener('click', function() {
+                if (active !== 'optimize') {
+                    automateOption.classList.remove('toggle-btn__option--active');
+                    optimizeOption.classList.add('toggle-btn__option--active');
+                    setSlider('optimize');
+                    active = 'optimize';
+                    playTransitionAndNavigate('index.html');
+                }
+            });
+
+            // Lenis Smooth Scroll
+            const lenis = new Lenis({
+                duration: 1.2,
+                smooth: true
+            });
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+        }
+
+        // Detect if this is a reload (not a navigation from another page)
+        let isReload = false;
+        if (performance && performance.getEntriesByType) {
+            const navEntries = performance.getEntriesByType('navigation');
+            if (navEntries.length > 0 && navEntries[0].type === 'reload') {
+                isReload = true;
+            }
+        } else if (performance && performance.navigation) {
+            // Fallback for older browsers
+            isReload = performance.navigation.type === 1;
+        }
+
+        if (isReload) {
+            document.body.classList.add('loading');
+            const preloader = document.getElementById('preloader');
+            const preloaderPercentage = document.getElementById('preloaderPercentage');
+            const preloaderPercentNum = document.getElementById('preloaderPercentNum');
+            preloader.style.display = 'flex';
+            setTimeout(() => {
+                preloaderPercentage.style.display = 'flex';
+                let percent = 0;
+                const interval = setInterval(() => {
+                    percent++;
+                    preloaderPercentNum.textContent = percent;
+                    if (percent >= 100) {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            preloaderPercentage.classList.add('hide');
+                            preloader.classList.add('upslide');
+                            setTimeout(() => {
+                                preloader.style.display = 'none';
+                                document.body.classList.remove('loading');
+                                runMainScripts();
+                            }, 700);
+                        }, 400);
+                    }
+                }, 12);
+            }, 500);
+        } else {
+            // Not a reload, skip preloader
+            document.getElementById('preloader').style.display = 'none';
+            document.body.classList.remove('loading');
+            runMainScripts();
+        }
+    </script>
+
+</body>
+</html>

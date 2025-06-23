@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROJECT OPTAT - AUTOMATE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auto.css">
+</head>
+<body>
+    <a href="#" class="lets-talk-btn">Let's Talk</a>
+    <div class="logo">
+        <img src="ASS/VWWEE.png" alt="">
+    </div>
+
+
+    <div class="main">
+        <img src="ASS/main.png" alt="">
+    </div>
+
+    
+
+
+    <div class="view-more-section">
+        <h2 class="view-more-heading">KNOW MORE ABOUT US.</h2>
+        <button class="view-more-btn">view possibilities</button>
+    </div>
+
+    <section class="schedule-contact">
+        <div class="schedule-contact__content">
+            <p class="schedule-contact__label">Reach out:</p>
+            <a href="mailto:hello@projectoptat.com" class="schedule-contact__email">
+                optat.work@gmail.com<span class="arrow">&rarr;</span>
+            </a>
+            <p class="schedule-contact__brand">Project Optat</p>
+            <h2 class="schedule-contact__heading">A creative studio serving up an outsider view with an in-house feel.</h2>
+            <div class="schedule-contact__links">
+                <a href="#" class="schedule-contact__link">Instagram <span class="arrow">&rarr;</span></a>
+                <a href="#" class="schedule-contact__link">LinkedIn <span class="arrow">&rarr;</span></a>
+            </div>
+        </div>
+    </section>
+
+    <div class="footer">
+        <img src="ASS/FOOTER.png" alt="">
+    </div>
+
+    <div class="transition-overlay" id="transitionOverlay"></div>
+    <div class="center-toggle-btn">
+        <div class="toggle-btn" id="toggleBtn">
+            <span class="toggle-btn__option" id="optimizeOption">OPTIMIZE</span>
+            <span class="toggle-btn__option toggle-btn__option--active" id="automateOption">AUTOMATE</span>
+            <span class="toggle-btn__slider" id="toggleSlider"></span>
+        </div>
+    </div>
+    <script>
+        // Toggle animation and navigation for OPTIMIZE/AUTOMATE
+        const optimizeOption = document.getElementById('optimizeOption');
+        const automateOption = document.getElementById('automateOption');
+        const toggleBtn = document.getElementById('toggleBtn');
+        let sliderEl = document.getElementById('toggleSlider');
+        let active = 'automate';
+        function setSlider(pos) {
+            sliderEl.style.transform = pos === 'optimize' ? 'translateX(0)' : 'translateX(100%)';
+        }
+        setSlider('automate');
+
+        // Overlay transition
+        const overlay = document.getElementById('transitionOverlay');
+        function playTransitionAndNavigate(target) {
+            overlay.classList.add('active');
+            setTimeout(() => {
+                window.location.href = target;
+            }, 700);
+        }
+
+        automateOption.addEventListener('click', function() {
+            if (active !== 'automate') {
+                optimizeOption.classList.remove('toggle-btn__option--active');
+                automateOption.classList.add('toggle-btn__option--active');
+                setSlider('automate');
+                active = 'automate';
+                playTransitionAndNavigate('auto.html');
+            }
+        });
+        optimizeOption.addEventListener('click', function() {
+            if (active !== 'optimize') {
+                automateOption.classList.remove('toggle-btn__option--active');
+                optimizeOption.classList.add('toggle-btn__option--active');
+                setSlider('optimize');
+                active = 'optimize';
+                playTransitionAndNavigate('index.html');
+            }
+        });
+    </script>
+
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.38/bundled/lenis.min.js"></script>
+    <script>
+        // Lenis Smooth Scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            smooth: true
+        });
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+    </script>
+
+</body>
+</html>
