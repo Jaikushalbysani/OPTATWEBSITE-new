@@ -171,7 +171,7 @@
             requestAnimationFrame(raf);
         }
 
-        // Detect if this is a reload (not a navigation from another page)
+        // Detect if this is a reload or first visit in this tab
         let isReload = false;
         if (performance && performance.getEntriesByType) {
             const navEntries = performance.getEntriesByType('navigation');
@@ -179,11 +179,12 @@
                 isReload = true;
             }
         } else if (performance && performance.navigation) {
-            // Fallback for older browsers
             isReload = performance.navigation.type === 1;
         }
 
-        if (isReload) {
+        // Use sessionStorage to detect first visit in this tab
+        let isFirstVisit = !sessionStorage.getItem('visited');
+        if (isFirstVisit || isReload) {
             document.body.classList.add('loading');
             const preloader = document.getElementById('preloader');
             const preloaderPercentage = document.getElementById('preloaderPercentage');
@@ -203,6 +204,7 @@
                             setTimeout(() => {
                                 preloader.style.display = 'none';
                                 document.body.classList.remove('loading');
+                                sessionStorage.setItem('visited', 'true');
                                 runMainScripts();
                             }, 700);
                         }, 400);
@@ -210,7 +212,7 @@
                 }, 12);
             }, 500);
         } else {
-            // Not a reload, skip preloader
+            // Not a reload or first visit, skip preloader
             document.getElementById('preloader').style.display = 'none';
             document.body.classList.remove('loading');
             runMainScripts();
