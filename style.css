@@ -520,5 +520,29 @@ body.loading main, body.loading .logo, body.loading .lets-talk-btn, body.loading
         margin-left: 10px;
         width:90%;
     }
+  /* Place Botpress widget just above the toggle button on mobile */
+  #bp-web-widget-container, .bp-widget, .bpw-floating-button {
+    top: 60px !important; /* Just below the lets-talk button */
+    right: 10px !important;
+    left: auto !important;
+    bottom: auto !important;
+    z-index: 2001 !important;
+  }
+  .bp-widget, #bp-web-widget-container {
+    max-width: 80vw !important;
+  }
+  .center-toggle-btn {
+    bottom: 20px !important;
+    margin-bottom: 0 !important;
+  }
+  #bp-web-widget-container, .bp-widget, .bpw-floating-button {
+    display: none !important;
+  }
+}
+
+/* Drop shadow for Botpress webchat widget */
+#bp-web-widget-container, .bp-widget, .bpw-floating-button {
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.35) !important;
+    border-radius: 16px !important;
 }
 
